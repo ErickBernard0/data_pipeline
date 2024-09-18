@@ -1,0 +1,1 @@
+### Construinda um Pipeline de dados através do curso "Pipeline de dados: combinando Python e orientação a objeto" ministrado pela Alura
