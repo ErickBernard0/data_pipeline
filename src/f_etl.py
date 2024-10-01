@@ -25,17 +25,28 @@ def normalizar_dados(df1, df2):
     # Retornando df normalizado
     return df_empresas
 
+#### SALVANDO ARQUIVO
+def salvando_arquivo(df_final):
+    try:
+        df_final.to_csv('data/context/dados_empresas.csv', index=False)
+        print("Arquivo salvo com sucesso")
+    except Exception as e:
+        print(f"Erro ao salvar o arquivo: {e}")
+
 #### LOCAL DO ARQUIVO
 path_data_empresa_a = 'data/raw/dados_empresaA.json'
 path_data_empresa_b = 'data/raw/dados_empresaB.csv'    
 
 #### CARREGANDO DADOS
-df_empresa_a = leitura_dados(path_data_empresa_a)
-df_empresa_b = leitura_dados(path_data_empresa_b)
+try:
+    df_empresa_a = leitura_dados(path_data_empresa_a)
+    df_empresa_b = leitura_dados(path_data_empresa_b)
+    
+    # NORMALIZANDO DADOS
+    df_empresas = normalizar_dados(df_empresa_a, df_empresa_b)
+    
+    # SALVANDO ARQUIVO
+    salvando_arquivo(df_empresas)
 
-#### NORMALIZANDO DADOS
-df_empresas = normalizar_dados(df_empresa_a, df_empresa_b)
-
-# EXIBIR RESULTADO
-print(df_empresas.head())
-print(df_empresas.tail())
+except Exception as e:
+    print(f"Erro durante o processamento dos dados: {e}")
